@@ -1,0 +1,81 @@
+/* ===== FONT IMPORTS ===== */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+/* ===== ROOT COLORS ===== */
+:root {
+  --primary: #0A1D37;
+  --secondary: #FF8E72;
+  --light-bg: #F8F8F8;
+  --text-dark: #1e1e1e;
+  --text-light: #777;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  background: var(--primary);
+  color: white;
+  text-align: center;
+  padding: 25px 15px;
+  margin-top: 40px;
+  font-family: "Inter", sans-serif;
+}
+
+.footer .container {
+  margin: 0 auto;
+}
+
+/* Social icons row */
+.socialMedia {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-bottom: 10px;
+}
+
+/* style each icon (SVG) */
+.socialMedia svg {
+  font-size: 28px;
+  cursor: pointer;
+  transition: transform 0.22s ease, color 0.22s ease, background 0.22s ease;
+  color: rgba(255,255,255,0.95); /* default icon color (white-ish) */
+  padding: 6px;
+  border-radius: 50%;
+  /* keep a tiny clickable circular hit area */
+}
+
+/* corrected selector with dot and hover styles */
+.socialMedia svg:hover {
+  color: var(--primary);               /* icon itself becomes deep blue */
+  transform: translateY(-4px) scale(1.06);
+  background: white;                   /* circular white background */
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+
+/* If you prefer peach-tinted background on hover instead of white, use this instead:
+.socialMedia svg:hover {
+  color: white;
+  background: rgba(255,142,114,0.12);
+  transform: translateY(-4px) scale(1.06);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+*/
+
+/* footer text */
+.footer p {
+  font-size: 15px;
+  opacity: 0.9;
+  font-family: "Inter", sans-serif;
+  margin: 0;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 600px) {
+  .socialMedia svg {
+    font-size: 24px;
+    padding: 5px;
+  }
+
+  .footer p {
+    font-size: 14px;
+  }
+}
