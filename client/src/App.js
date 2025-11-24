@@ -8,6 +8,7 @@ import Signup from './pages/Signup.js';
 import Profile from './pages/Profile.js';
 import Footer from "./components/Footer.js";
 
+
 import { SearchProvider } from "./context/SearchContext";
 
 const App=() => {

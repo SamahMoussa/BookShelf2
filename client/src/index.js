@@ -1,6 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom'; // <-- changed
 import App from './App';
 import { AuthProvider } from './context/AuthContext';
 import './styles.css';
@@ -12,7 +12,7 @@ const root = createRoot(container);
 
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <HashRouter> 
       <AuthProvider>
         <WishlistProvider>
           <ReviewProvider>
@@ -20,6 +20,6 @@ root.render(
           </ReviewProvider>
         </WishlistProvider>
       </AuthProvider>
-    </BrowserRouter>
+    </HashRouter>
   </React.StrictMode>
 );
