@@ -22,7 +22,6 @@ const Books = () => {
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
 
-  // ---------------- FETCH BOOKS ----------------
   useEffect(() => {
     const fetchBooks = async () => {
       try {
@@ -38,7 +37,6 @@ const Books = () => {
     fetchBooks();
   }, []);
 
-  // ---------------- FETCH REVIEWS ----------------
   useEffect(() => {
     if (!selectedBook) return;
 
@@ -65,7 +63,6 @@ const Books = () => {
     fetchReviews();
   }, [selectedBook]);
 
-  // ---------------- FILTER BOOKS ----------------
   const filteredBooks = books.filter(
     (book) =>
       book.title.toLowerCase().includes(searchText.toLowerCase()) ||
@@ -73,7 +70,6 @@ const Books = () => {
       book.genre.toLowerCase().includes(searchText.toLowerCase())
   );
 
-  // ---------------- STARS ----------------
   const renderStars = (value, interactive = false) =>
     [...Array(5)].map((_, index) => {
       const starValue = index + 1;
@@ -97,7 +93,7 @@ const Books = () => {
       );
     });
 
-  // ---------------- WISHLIST ----------------
+
   const handleAddToWishlist = async () => {
     if (!user) return alert("Please log in");
 
@@ -124,7 +120,6 @@ const Books = () => {
     }
   };
 
-  // ---------------- SUBMIT REVIEW ----------------
   const handleReviewSubmit = async () => {
     if (!user) return alert("Please log in");
     if (!reviewText && rating === 0)
@@ -159,7 +154,6 @@ const Books = () => {
     }
   };
 
-  // ---------------- DELETE REVIEW ----------------
   const handleDeleteReview = async (reviewId, reviewUserId) => {
     if (!user || user.id !== reviewUserId) return;
 
@@ -174,11 +168,11 @@ const Books = () => {
     }
   };
 
-  // ---------------- LOADING / ERROR ----------------
+
   if (loading) return <p className="loading-text">Loading books...</p>;
   if (error) return <p className="error-text">{error}</p>;
 
-  // ---------------- BOOK DETAILS ----------------
+
   if (selectedBook) {
     return (
       <div className="bookDetail">
@@ -246,7 +240,7 @@ const Books = () => {
     );
   }
 
-  // ---------------- BOOK LIST ----------------
+
   return (
     <div className="menu">
       <h1 className="menuTitle">Books</h1>
