@@ -1,17 +1,27 @@
-import React, { useState, useContext } from 'react';
-import { AuthContext } from "../context/AuthContext";
+import React, { useState } from "react";
+import { useAuth } from "../context/AuthContext";
 import "../styles/Signup.css";
 
 const Signup = () => {
-  const { user, login } = useContext(AuthContext);
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
+  const { user, signup } = useAuth();
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
-    if (!username || !email) return alert('Fill both fields');
-    // In-memory "sign up" just logs in the user
-    login(username, email);
+    if (!username || !email || !password) return alert("Fill all fields");
+
+    setLoading(true);
+    const result = await signup(username, email, password);
+    setLoading(false);
+
+    if (result.success) {
+      alert(`Signup successful! Welcome, ${result.user.username}`);
+    } else {
+      alert(result.message);
+    }
   };
 
   if (user) {
@@ -25,19 +35,27 @@ const Signup = () => {
 
   return (
     <div className="auth-box">
-      <h2>SignUp</h2>
+      <h2>Sign Up</h2>
       <form onSubmit={submit}>
-        <input 
-          placeholder="Username" 
-          value={username} 
-          onChange={e => setUsername(e.target.value)} 
+        <input
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
         />
-        <input 
-          placeholder="Email" 
-          value={email} 
-          onChange={e => setEmail(e.target.value)} 
+        <input
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
-        <button type="submit">Signup</button>
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button type="submit" disabled={loading}>
+          {loading ? "Signing up..." : "Sign Up"}
+        </button>
       </form>
     </div>
   );

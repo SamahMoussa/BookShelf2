@@ -1,11 +1,11 @@
 import React from "react";
-import "../styles/Books.css"; // Make sure CSS file is imported
+import "../styles/Books.css";
 
 const BookItem = ({ image, title, author, genre }) => {
   return (
     <div className="book-card">
       <img
-        src={image}
+        src={image || "https://via.placeholder.com/150"} // fallback if image missing
         alt={title}
         className="bookImage"
       />

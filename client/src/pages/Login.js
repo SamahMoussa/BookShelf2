@@ -1,20 +1,35 @@
-import React, { useState, useContext } from 'react';
-import { AuthContext } from "../context/AuthContext";
+import React, { useState } from "react";
+import { useAuth } from "../context/AuthContext";
 import "../styles/Login.css";
 
 const Login = () => {
-  const { user, login } = useContext(AuthContext);
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
+  const { user, login } = useAuth();
 
-  // Submit handler
-  const submit = (e) => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const submit = async (e) => {
     e.preventDefault();
-    if (!username || !email) return alert('Fill both fields');
-    login(username, email);
+
+    // ✅ Required fields check
+    if (!username.trim() || !password.trim()) {
+      alert("Username and password are required");
+      return;
+    }
+
+    setLoading(true);
+    const result = await login(username, password);
+    setLoading(false);
+
+    if (result.success) {
+      alert(`Welcome back, ${result.user.username}!`);
+    } else {
+      alert(result.message || "Invalid username or password");
+    }
   };
 
-  // If already logged in, show a message instead of form
+  // ✅ Already logged in
   if (user) {
     return (
       <div className="auth-box">
@@ -27,18 +42,27 @@ const Login = () => {
   return (
     <div className="auth-box">
       <h2>Login</h2>
+
       <form onSubmit={submit}>
-        <input 
-          placeholder="Username" 
-          value={username} 
-          onChange={e => setUsername(e.target.value)} 
+        <input
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
         />
-        <input 
-          placeholder="Email" 
-          value={email} 
-          onChange={e => setEmail(e.target.value)} 
+
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
         />
-        <button type="submit">Login</button>
+
+        <button type="submit" disabled={loading}>
+          {loading ? "Logging in..." : "Login"}
+        </button>
       </form>
     </div>
   );
