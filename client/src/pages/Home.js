@@ -6,13 +6,11 @@ const Home = () => {
   const [books, setBooks] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Fetch books from API
   useEffect(() => {
     const fetchBooks = async () => {
       try {
         const res = await fetch("http://localhost:5000/books");
         const data = await res.json();
-        // Filter featured books (id 17-22)
         const featured = data.filter((book) => Number(book.id) >= 17 && Number(book.id) <= 22);
         setBooks(featured);
       } catch (err) {
@@ -42,7 +40,6 @@ const Home = () => {
 
   return (
     <div className="home">
-      {/* Hero Section */}
       <section className="hero">
         <h1>Welcome to BookShelf</h1>
         <p>Discover Your Next Favorite Book</p>
@@ -52,7 +49,6 @@ const Home = () => {
         </Link>
       </section>
 
-      {/* Featured Books Carousel */}
       <section className="featured-authors-section">
         <div className="featured">
           <h2 className="section-title">Featured Books</h2>
@@ -69,7 +65,6 @@ const Home = () => {
           <p className="book-author">{books[currentIndex].author}</p>
         </div>
 
-        {/* Popular Authors */}
         <div className="authors">
           <h2 className="section-title">Popular Authors</h2>
           <div className="authors-grid">
@@ -80,7 +75,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Newsletter */}
       <section className="newsletter">
         <h2>Join Our Book Lovers Community</h2>
         <p>Stay updated with new releases, trends, and book recommendations.</p>
