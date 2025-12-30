@@ -36,7 +36,6 @@ db.connect((err) => {
   else console.log("MySQL connected successfully");
 });
 
-// ----------------- BOOKS API -----------------
 app.get("/books", (req, res) => {
   const sql = `
     SELECT 
@@ -55,8 +54,6 @@ app.get("/books", (req, res) => {
     res.json(results);
   });
 });
-
-// ----------------- USERS API -----------------
 
 // Signup
 app.post("/users/signup", (req, res) => {
@@ -95,7 +92,6 @@ app.post("/users/login", (req, res) => {
   });
 });
 
-// ----------------- REVIEWS API -----------------
 
 // Get reviews for a book
 app.get("/reviews/:bookId", (req, res) => {
@@ -125,7 +121,7 @@ app.post("/reviews", (req, res) => {
   });
 });
 
-// Delete review (only by owner)
+// Delete review 
 app.delete("/reviews", (req, res) => {
   const { review_id, user_id } = req.body;
   if (!review_id || !user_id)
@@ -145,7 +141,6 @@ app.delete("/reviews", (req, res) => {
   });
 });
 
-// ----------------- WISHLIST API -----------------
 app.get("/wishlist/:userId", (req, res) => {
   const sql = `
     SELECT b.*
