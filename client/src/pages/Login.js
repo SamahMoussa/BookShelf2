@@ -12,7 +12,6 @@ const Login = () => {
   const submit = async (e) => {
     e.preventDefault();
 
-    // ✅ Required fields check
     if (!username.trim() || !password.trim()) {
       alert("Username and password are required");
       return;
@@ -29,7 +28,6 @@ const Login = () => {
     }
   };
 
-  // ✅ Already logged in
   if (user) {
     return (
       <div className="auth-box">
